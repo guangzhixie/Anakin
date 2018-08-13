@@ -273,6 +273,12 @@ TEST(TestSaberFunc, test_tensor_constructor) {
     LOG(INFO) << "test ARM INT8 tensor";
     tensor_constructor<ARM, ARM, AK_INT8>();
 #endif
+
+#ifdef USE_BM
+    Env<BM>::env_init();
+    LOG(INFO) << "test BM FP32 tensor";
+    tensor_constructor<BM, X86, AK_FLOAT>();
+#endif
 }
 
 #if 1
@@ -500,6 +506,12 @@ TEST(TestSaberFunc, test_tensor_deepcopy) {
     LOG(INFO) << "test ARM INT8 tensor deep copy";
     tensor_deepcopy<ARM, ARM, AK_INT8>();
 #endif //USE_ARM_PLACE
+
+#ifdef USE_BM
+    Env<BM>::env_init();
+    LOG(INFO) << "test BM FP32 tensor deep copy";
+    tensor_deepcopy<BM, X86, AK_FLOAT>();
+#endif //USE_BM
 }
 #endif
 
@@ -600,6 +612,12 @@ TEST(TestSaberFunc, test_saber_tensor_shape) {
     LOG(INFO) << "test ARM tensor shape API";
     test_tensor_shape<ARM>();
 #endif //USE_ARM_PLACE
+
+#ifdef USE_BM
+    Env<BM>::env_init();
+    LOG(INFO) << "test BM tensor shape API";
+    test_tensor_shape<BM>();
+#endif //USE_BM
 }
 #endif
 
@@ -714,6 +732,12 @@ TEST(TestSaberFunc, test_tensor_reshape_realloc) {
     LOG(INFO) << "test ARM INT8 tensor reshape realloc";
     tensor_reshape_realloc<ARM, ARM, AK_INT8>();
 #endif //USE_ARM_PLACE
+
+#ifdef USE_BM
+    Env<BM>::env_init();
+    LOG(INFO) << "test BM FP32 tensor reshape realloc";
+    tensor_reshape_realloc<BM, X86, AK_FLOAT>();
+#endif //USE_BM
 }
 #endif
 
@@ -788,6 +812,12 @@ TEST(TestSaberFunc, test_tensor_ops) {
     LOG(INFO) << "test ARM INT8 tensor op";
     test_tensor_op<ARM, ARM, AK_INT8>();
 #endif //USE_ARM_PLACE
+
+#ifdef USE_BM
+    Env<BM>::env_init();
+    LOG(INFO) << "test BM FP32 tensor op";
+    test_tensor_op<BM, X86, AK_FLOAT>();
+#endif //USE_BM
 }
 #endif
 
@@ -834,6 +864,8 @@ TEST(TestSaberFunc, test_tensor_share_diff_dtype) {
     LOG(INFO) << "test ARM tensor share different data type";
     tensor_share_diff_dtype<ARM, ARM>();
 #endif //USE_ARM_PLACE
+
+//BM does not support this yet
 }
 #endif
 int main(int argc, const char** argv) {
