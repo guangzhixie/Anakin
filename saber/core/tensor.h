@@ -995,8 +995,6 @@ private:
 };
 
 #ifdef USE_BM
-#ifndef BM_TENSOR_COPY
-#define BM_TENSOR_COPY
 template<>
 template<> inline
 SaberStatus Tensor<BM>::copy_from<X86>(const Tensor<X86>& tensor) {
@@ -1020,7 +1018,6 @@ SaberStatus Tensor<X86>::copy_from<BM>(const Tensor<BM>& tensor) {
     BMDNN_CHECK(bm_memcpy_d2s(get_bm_handle(), bm_mem_from_system((float*) mutable_data()), *device_data_ptr));
     return SaberSuccess;
 }
-#endif
 #endif
 
 } //namespace saber
