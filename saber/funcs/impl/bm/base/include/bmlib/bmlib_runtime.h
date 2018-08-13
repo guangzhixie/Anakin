@@ -187,12 +187,6 @@ unsigned int       bm_mem_get_device_size(struct bm_mem_desc mem);
 void               bm_mem_set_device_size(struct bm_mem_desc & mem, unsigned int size);
 bm_mem_type_t      bm_mem_get_type(struct bm_mem_desc mem);
 
-/* 
-* brief Get the handle of bmlib_runtime
-* return : If the handle has been inited, return the handle it self , else init one and return it
-*/
-bm_handle_t get_bm_handle();
-
 unsigned long long bm_gmem_arm_reserved_request(bm_handle_t handle);
 void bm_gmem_arm_reserved_release(bm_handle_t handle);
 
