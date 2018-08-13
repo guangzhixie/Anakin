@@ -183,16 +183,6 @@ const char* cudnn_get_errorstring(cudnnStatus_t status);
 #include "bmdnn_ext_api.h"
 #include "bmlib_utils.h"
 
-inline bm_handle_t GET_BM_HANDLE(int devid) {
-    bm_handle_t handle;
-    int ret = 0;
-
-    ret = bm_dev_request(&handle, 0, devid);
-    CHECK_NE(ret, 0) << "request BM device failed: " << devid;
-    
-    return handle;
-}
-
 #define BMDNN_CHECK(condition) \
   do { \
     bm_status_t error = condition; \
