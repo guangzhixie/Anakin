@@ -45,7 +45,7 @@ public:
 #ifdef USE_BM        
         if(std::is_same<TargetType, BM>::value){
             LOG(INFO) << "context init for BM";
-            _bm_handle = API::get_handle();
+            _bm_handle = TargetWrapper<BM>::get_handle();
             return;
         }
 #endif
