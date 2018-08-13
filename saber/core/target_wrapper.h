@@ -567,8 +567,8 @@ struct TargetWrapper<BM, __device_target> {
         const void* src, size_t src_offset, int src_id, \
         size_t count, stream_t stream, __DtoD);
 
-    static void async_memcpy_p2p(TPtr dst, size_t dst_offset, int dst_id, \
-        const TPtr src, size_t src_offset, int src_id, \
+    static void async_memcpy_p2p(void* dst, size_t dst_offset, int dst_id, \
+        const void* src, size_t src_offset, int src_id, \
         size_t count, stream_t stream);
 
     /**

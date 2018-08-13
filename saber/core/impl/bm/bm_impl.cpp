@@ -153,8 +153,8 @@ void BM_API::sync_memcpy_p2p(void* dst, size_t dst_offset, int dst_id, \
     LOG(ERROR) << "BM sync_memcpy_p2p: temporarily no used";
 };
 
-static void async_memcpy_p2p(TPtr dst, size_t dst_offset, int dst_id, \
-        const TPtr src, size_t src_offset, int src_id, \
+static void async_memcpy_p2p(void* dst, size_t dst_offset, int dst_id, \
+        const void* src, size_t src_offset, int src_id, \
         size_t count, stream_t stream) {
 
     LOG(ERROR) << "BM async_memcpy_p2p: temporarily no used";
