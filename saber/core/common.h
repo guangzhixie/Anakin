@@ -183,7 +183,7 @@ const char* cudnn_get_errorstring(cudnnStatus_t status);
 #include "bmdnn_ext_api.h"
 #include "bmlib_utils.h"
 
-inline bm_handle_t GET_BM_HANDLE(devid) {
+inline bm_handle_t GET_BM_HANDLE(int devid) {
     bm_handle_t handle;
     int ret = 0;
 
