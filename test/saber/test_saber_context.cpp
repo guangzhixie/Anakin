@@ -60,7 +60,7 @@ TEST(TestSaberFuncTest, test_arm_context) {
 #ifdef USE_BM
 TEST(TestSaberFuncTest, test_bm_context) {
     Context<BM> ctx;
-    CHECK_NOTNULL(ctx.get_bm_handle()) << "Failed to get BM handle";
+    CHECK_NOTNULL(ctx.get_handle()) << "Failed to get BM handle";
 }
 #endif //USE_BM
 
