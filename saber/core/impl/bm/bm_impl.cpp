@@ -56,7 +56,7 @@ int BM_API::get_device_id(){
 }
         
 void BM_API::mem_alloc(void** ptr, size_t n){
-    handle = get_bm_handle();
+    handle = GET_BM_HANDLE(0);
     /* bm_device_mem_t *mem = reinterpret_cast<struct bm_mem_desc *>(*ptr); */
     bm_device_mem_t *mem = new bm_device_mem_t();
     BMDNN_CHECK(bm_malloc_device_byte(handle, mem, n));
@@ -65,7 +65,7 @@ void BM_API::mem_alloc(void** ptr, size_t n){
         
 void BM_API::mem_free(void* ptr){
     if(ptr != nullptr){
-        handle = get_bm_handle();
+        handle = GET_BM_HANDLE(0);
         bm_free_device(handle, *(struct bm_mem_desc*)(ptr));
         delete ptr;
     }
@@ -81,7 +81,7 @@ void BM_API::mem_set(void* ptr, int value, size_t n){
 void BM_API::sync_memcpy(void* dst, size_t dst_offset, int dst_id, \
         const void* src, size_t src_offset, int src_id, \
         size_t count, __DtoD) {
-    handle = get_bm_handle(); 
+    handle = GET_BM_HANDLE(0); 
     //BMDNN_CHECK(bm_memcpy_d2d(handle, bm_mem_from_device(dst), dst_id, bm_mem_from_device(src), src_id, count));
     BMDNN_CHECK(bm_memcpy_d2d(handle, *(bm_device_mem_t *)(dst), dst_id, *(bm_device_mem_t *)(src), src_id, count));
     LOG(INFO) << "BM sync_memcpy: device to device, finished";
@@ -90,7 +90,7 @@ void BM_API::sync_memcpy(void* dst, size_t dst_offset, int dst_id, \
 void BM_API::sync_memcpy(void* dst, size_t dst_offset, int dst_id, \
         const void* src, size_t src_offset, int src_id, \
         size_t count, __HtoD) {
-    handle = get_bm_handle(); 
+    handle = GET_BM_HANDLE(0); 
     BMDNN_CHECK(bm_memcpy_s2d(handle, *(bm_device_mem_t *)(dst), bm_mem_from_system(src)));
 
     #ifdef DEBUG
@@ -104,7 +104,7 @@ void BM_API::sync_memcpy(void* dst, size_t dst_offset, int dst_id, \
 void BM_API::sync_memcpy(void* dst, size_t dst_offset, int dst_id, \
         const void* src, size_t src_offset, int src_id, \
         size_t count, __DtoH) {
-    handle = get_bm_handle(); 
+    handle = GET_BM_HANDLE(0); 
     BMDNN_CHECK(bm_memcpy_d2s(handle, bm_mem_from_system(dst), *(bm_device_mem_t *)(src)));
 
     #ifdef DEBUG

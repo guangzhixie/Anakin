@@ -22,7 +22,7 @@ SaberStatus VenderConv2D<BM, AK_FLOAT>::\
          ConvParam<BM> &param, Context<BM> &ctx)
 {
 
-    _handle = get_bm_handle();
+    _handle = GET_BM_HANDLE(0);
     return create(inputs, outputs, param, ctx);
 }
 
