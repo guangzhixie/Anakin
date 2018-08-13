@@ -130,6 +130,10 @@ TEST(TestSaberFunc, test_saber_buffer) {
     test_buffer<ARM, ARM, AK_INT8>();
 #endif
 
+#ifdef USE_BM
+    test_buffer<BM, X86, AK_FLOAT>();
+#endif
+
 }
 
 int main(int argc, const char** argv) {
