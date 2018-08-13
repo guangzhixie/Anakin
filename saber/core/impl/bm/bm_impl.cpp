@@ -125,11 +125,43 @@ void BM_API::sync_memcpy(void* dst, size_t dst_offset, int dst_id, \
     LOG(INFO) << "BM sync_memcpy: device to host, finished";
 };
 
+static void async_memcpy(void* dst, size_t dst_offset, int dst_id, \
+        const void* src, size_t src_offset, int src_id, \
+        size_t count, stream_t stream, __HtoD) {
+    LOG(WARNING) << "BM async_memcpy: currently using sync method";
+    BM_API::sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, stream, __HtoD);
+};
+
+static void async_memcpy(void* dst, size_t dst_offset, int dst_id, \
+        const void* src, size_t src_offset, int src_id, \
+        size_t count, stream_t stream, __DtoH) {
+    LOG(WARNING) << "BM async_memcpy: currently using sync method";
+    BM_API::sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, stream, __DtoH);
+};
+
+static void async_memcpy(void* dst, size_t dst_offset, int dst_id, \
+        const void* src, size_t src_offset, int src_id, \
+        size_t count, stream_t stream, __DtoD) {
+    LOG(WARNING) << "BM async_memcpy: currently using sync method";
+    BM_API::sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, stream, __DtoD);
+};
+
 void BM_API::sync_memcpy_p2p(void* dst, size_t dst_offset, int dst_id, \
         const void* src, size_t src_offset, int src_id, \
         size_t count) { 
 
     LOG(ERROR) << "BM sync_memcpy_p2p: temporarily no used";
+};
+
+static void async_memcpy_p2p(TPtr dst, size_t dst_offset, int dst_id, \
+        const TPtr src, size_t src_offset, int src_id, \
+        size_t count, stream_t stream) {
+
+    LOG(ERROR) << "BM async_memcpy_p2p: temporarily no used";
+};
+
+static void device_sync() {
+    LOG(ERROR) << "BM device_sync: temporarily no used";
 };
 
 //! BM TargetWrapper
