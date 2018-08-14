@@ -89,35 +89,9 @@ void print_tensor<BM>(Tensor<BM>& tensor,  \
     switch (type){
         case AK_FLOAT: {
             LOG(INFO) << "BM device tensor data:" << tensor.size();
-
-            /*
-            const bm_device_mem_t* device_data_ptr = tensor.data();
-            unsigned long long gaddr = bm_mem_get_device_addr(*device_data_ptr);
-            bm_flush(get_bm_handle());
-            float* device_data = (float*)bm_get_global_addr(gaddr);
-
-            for (int i = 0; i < tensor.size(); ++i) {
-                printf("%.2f ", device_data[i]);
-
-                if ((i + 1) % (4 * tensor.width()) == 0) {
-                    printf("\n");
-                }
-            }*/
-
-            float *host_mem = new float[tensor.size()];
-            auto* device_data_ptr = const_cast<bm_device_mem_t *>((bm_device_mem_t*) tensor.data());
-            bm_memcpy_d2s(API::get_handle(), bm_mem_from_system(host_mem), *device_data_ptr);
-
-            for (int i = 0; i < tensor.size(); ++i) {
-                printf("%.2f\t", host_mem[i]);
-
-                if ((i + 1) % tensor.width() == 0){
-                    printf("\n");
-                }
-            }
-            printf("\n");
-
-            delete [] host_mem;
+            Tensor<X86> thost(tensor.shape(), type);
+            thost.copy_from(tensor);
+            print_tensor(thost);
             break;
         }
         default: LOG(FATAL) << "data type: " << type << " is unsupported now";
