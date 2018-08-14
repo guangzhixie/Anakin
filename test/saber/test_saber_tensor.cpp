@@ -17,12 +17,6 @@ void tensor_constructor() {
     typedef typename IF<std::is_same<target_D, __host_target>::value, then_type, else_type>::Type flag_type;
     typedef typename IF<std::is_same<target_D, __host_target>::value, HAPI, DAPI>::Type copy_API;
 
-    std::cout << "targetD is __host_target? " << std::is_same<target_D, __host_target>::value << std::endl;
-    std::cout << "targetH is __host_target? " << std::is_same<target_H, __host_target>::value << std::endl;
-    std::cout << "targetH is __device_target? " << std::is_same<target_H, __device_target>::value << std::endl;
-    std::cout << "targetD is target_H? " << std::is_same<target_D, target_H>::value << std::endl;
-    //std::cout << "flag_type? " << flag_type << std::endl;
-
     typedef Tensor<TargetH> TensorH;
     typedef Tensor<TargetD> TensorD;
 
@@ -636,11 +630,11 @@ void tensor_reshape_realloc() {
     typedef TargetWrapper<TargetH> HAPI;
     typedef TargetWrapper<TargetD> DAPI;
 
-    typedef typename TargetTypeTraits<TargetH>::target_type target_H;
-    typedef typename TargetTypeTraits<TargetD>::target_type target_D;
+    typedef typename TargetTypeTraits<TargetH>::target_category target_H;
+    typedef typename TargetTypeTraits<TargetD>::target_category target_D;
     typedef typename IF<std::is_same<target_D, target_H>::value, __HtoH, __DtoH>::Type then_type;
     typedef typename IF<std::is_same<target_D, target_H>::value, __DtoD, __HtoD>::Type else_type;
-    typedef typename IF<std::is_same<target_D, __host_target>::value, else_type, then_type>::Type flag_type;
+    typedef typename IF<std::is_same<target_D, __host_target>::value, then_type, else_type>::Type flag_type;
     typedef typename IF<std::is_same<target_D, __host_target>::value, HAPI, DAPI>::Type copy_API;
 
     typedef Tensor<TargetH> TensorH;
@@ -755,11 +749,11 @@ void test_tensor_op() {
     typedef TargetWrapper<TargetH> HAPI;
     typedef TargetWrapper<TargetD> DAPI;
 
-    typedef typename TargetTypeTraits<TargetH>::target_type target_H;
-    typedef typename TargetTypeTraits<TargetD>::target_type target_D;
+    typedef typename TargetTypeTraits<TargetH>::target_category target_H;
+    typedef typename TargetTypeTraits<TargetD>::target_category target_D;
     typedef typename IF<std::is_same<target_D, target_H>::value, __HtoH, __DtoH>::Type then_type;
     typedef typename IF<std::is_same<target_D, target_H>::value, __DtoD, __HtoD>::Type else_type;
-    typedef typename IF<std::is_same<target_D, __host_target>::value, else_type, then_type>::Type flag_type;
+    typedef typename IF<std::is_same<target_D, __host_target>::value, then_type, else_type>::Type flag_type;
     typedef typename IF<std::is_same<target_D, __host_target>::value, HAPI, DAPI>::Type copy_API;
 
     typedef Tensor<TargetH> TensorH;
