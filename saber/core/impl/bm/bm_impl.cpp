@@ -125,21 +125,21 @@ void BM_API::async_memcpy(void* dst, size_t dst_offset, int dst_id, \
         const void* src, size_t src_offset, int src_id, \
         size_t count, stream_t stream, __HtoD) {
     LOG(WARNING) << "BM async_memcpy: currently using sync method";
-    sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, __HtoD);
+    sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, __HtoD());
 };
 
 void BM_API::async_memcpy(void* dst, size_t dst_offset, int dst_id, \
         const void* src, size_t src_offset, int src_id, \
         size_t count, stream_t stream, __DtoH) {
     LOG(WARNING) << "BM async_memcpy: currently using sync method";
-    sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, __DtoH);
+    sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, __DtoH());
 };
 
 void BM_API::async_memcpy(void* dst, size_t dst_offset, int dst_id, \
         const void* src, size_t src_offset, int src_id, \
         size_t count, stream_t stream, __DtoD) {
     LOG(WARNING) << "BM async_memcpy: currently using sync method";
-    sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, __DtoD);
+    sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, __DtoD());
 };
 
 void BM_API::sync_memcpy_p2p(void* dst, size_t dst_offset, int dst_id, \
