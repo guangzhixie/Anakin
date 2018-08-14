@@ -347,9 +347,9 @@ void tensor_deepcopy() {
     td01.share_sub_buffer(dev_tmp0, va_sh0, off_sh0);
 
     LOG(INFO) << "th01";
-    print_tensor(th01)
+    print_tensor(th01);
     LOG(INFO) << "td01";
-    print_tensor(td01)
+    print_tensor(td01);
 
     print_tensor(th0);
     print_tensor(th1);
