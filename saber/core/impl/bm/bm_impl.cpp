@@ -1,10 +1,6 @@
 #include "core/tensor.h"
 #include "env.h"
 
-#include "bmlib_runtime.h"
-#include "bmdnn_api.h"
-#include "bmlib_utils.h"
-
 #ifdef USE_BM
 const char* bmdnn_get_errorstring(bm_status_t error) {
     switch (error) {
@@ -127,21 +123,21 @@ void BM_API::sync_memcpy(void* dst, size_t dst_offset, int dst_id, \
 
 static void async_memcpy(void* dst, size_t dst_offset, int dst_id, \
         const void* src, size_t src_offset, int src_id, \
-        size_t count, stream_t stream, __HtoD) {
+        size_t count, BM_API::stream_t stream, __HtoD) {
     LOG(WARNING) << "BM async_memcpy: currently using sync method";
     BM_API::sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, __HtoD);
 };
 
 static void async_memcpy(void* dst, size_t dst_offset, int dst_id, \
         const void* src, size_t src_offset, int src_id, \
-        size_t count, stream_t stream, __DtoH) {
+        size_t count, BM_API::stream_t stream, __DtoH) {
     LOG(WARNING) << "BM async_memcpy: currently using sync method";
     BM_API::sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, __DtoH);
 };
 
 static void async_memcpy(void* dst, size_t dst_offset, int dst_id, \
         const void* src, size_t src_offset, int src_id, \
-        size_t count, stream_t stream, __DtoD) {
+        size_t count, BM_API::stream_t stream, __DtoD) {
     LOG(WARNING) << "BM async_memcpy: currently using sync method";
     BM_API::sync_memcpy(dst, dst_offset, dst_id, src, src_offset, src_id, count, __DtoD);
 };
