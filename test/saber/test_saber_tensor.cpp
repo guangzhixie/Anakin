@@ -14,11 +14,8 @@ void tensor_constructor() {
     typedef typename TargetTypeTraits<TargetD>::target_type target_D;
     typedef typename IF<std::is_same<target_D, target_H>::value, __HtoH, __DtoH>::Type then_type;
     typedef typename IF<std::is_same<target_D, target_H>::value, __DtoD, __HtoD>::Type else_type;
-    typedef typename IF<std::is_same<target_D, __host_target>::value, else_type, then_type>::Type flag_type;
+    typedef typename IF<std::is_same<target_D, __host_target>::value, then_type, else_type>::Type flag_type;
     typedef typename IF<std::is_same<target_D, __host_target>::value, HAPI, DAPI>::Type copy_API;
-
-    LOG(INFO) << "result: " << std::is_same<target_D, __host_target>::value;
-    LOG(INFO) << "result: " << std::is_same<target_D, target_H>::value;
 
     typedef Tensor<TargetH> TensorH;
     typedef Tensor<TargetD> TensorD;
@@ -105,7 +102,7 @@ void tensor_constructor() {
     LOG(INFO) << "sync-mem";
     copy_API::sync_memcpy(dev_data_ptr, 0, DAPI::get_device_id(), \
         host_data_ptr, 0, HAPI::get_device_id(), \
-        sizeof(dtype) * sh1.count(), __HtoD());
+        sizeof(dtype) * sh1.count(), flag_type());
 
     LOG(INFO) << "|--construct host tensor from host data ptr";
     TensorH thost3(host_data_ptr, TargetH(), HAPI::get_device_id(), sh1, Dtype);
