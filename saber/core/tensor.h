@@ -993,7 +993,7 @@ private:
         return idx;
     }
 };
-
+/*
 #ifdef USE_BM
 #ifndef BM_TENSOR_COPY
 #define BM_TENSOR_COPY
@@ -1022,7 +1022,7 @@ SaberStatus Tensor<X86>::copy_from<BM>(const Tensor<BM>& tensor) {
 }
 #endif
 #endif
-
+*/
 } //namespace saber
 
 } //namespace anakin
