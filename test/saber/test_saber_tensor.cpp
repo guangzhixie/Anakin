@@ -17,6 +17,9 @@ void tensor_constructor() {
     typedef typename IF<std::is_same<target_D, __host_target>::value, else_type, then_type>::Type flag_type;
     typedef typename IF<std::is_same<target_D, __host_target>::value, HAPI, DAPI>::Type copy_API;
 
+    LOG(INFO) << "result: " << std::is_same<target_D, __host_target>::value;
+    LOG(INFO) << "result: " << std::is_same<target_D, target_H>::value;
+
     typedef Tensor<TargetH> TensorH;
     typedef Tensor<TargetD> TensorD;
 
