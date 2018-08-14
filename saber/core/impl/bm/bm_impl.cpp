@@ -108,9 +108,8 @@ void BM_API::sync_memcpy(void* dst, size_t dst_offset, int dst_id, \
 void BM_API::sync_memcpy(void* dst, size_t dst_offset, int dst_id, \
         const void* src, size_t src_offset, int src_id, \
         size_t count, __DtoH) {
-    //handle = BM_API::get_handle();
-    LOG(INFO) << "BM sync_memcpy"; 
-    BMDNN_CHECK(bm_memcpy_d2s(handle, bm_mem_from_system((float *)dst), *(bm_device_mem_t *)(src)));
+    //handle = BM_API::get_handle(); 
+    BMDNN_CHECK(bm_memcpy_d2s(handle, bm_mem_from_system(dst), *(bm_device_mem_t *)(src)));
 
     for(int i=0; i<10; i++)
         LOG(INFO) << "DtoH dst: " << *((float *)(dst)+i);
