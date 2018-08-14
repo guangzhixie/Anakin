@@ -228,6 +228,7 @@ struct TargetWrapper<TargetType, __host_target> {
     static void device_sync() {}
 };
 
+template struct TargetWrapper<X86, __host_target>;
 
 #ifdef USE_CUDA
 /**
