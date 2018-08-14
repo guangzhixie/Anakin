@@ -95,9 +95,11 @@ void tensor_constructor() {
         host_data_ptr[i] = static_cast<dtype>(i);
     }
 
+    LOG(INFO) << "mem_alloc";
     DAPI::mem_alloc(&tmp_pt_dev, sizeof(dtype) * sh1.count());
     dev_data_ptr = static_cast<dtype*>(tmp_pt_dev);
 
+    LOG(INFO) << "sync-mem";
     copy_API::sync_memcpy(dev_data_ptr, 0, DAPI::get_device_id(), \
         host_data_ptr, 0, HAPI::get_device_id(), \
         sizeof(dtype) * sh1.count(), flag_type());
@@ -262,8 +264,8 @@ TEST(TestSaberFunc, test_tensor_constructor) {
     Env<X86>::env_init();
     LOG(INFO) << "test X86 FP32 tensor";
     tensor_constructor<X86, X86, AK_FLOAT>();
-    LOG(INFO) << "test X86 INT8 tensor";
-    tensor_constructor<X86, X86, AK_INT8>();
+    //LOG(INFO) << "test X86 INT8 tensor";
+    //tensor_constructor<X86, X86, AK_INT8>();
 #endif
 
 #ifdef USE_ARM_PLACE
