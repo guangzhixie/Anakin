@@ -261,9 +261,9 @@ TEST(TestSaberFunc, test_tensor_constructor) {
 #ifdef USE_X86_PLACE
     Env<X86>::env_init();
     LOG(INFO) << "test X86 FP32 tensor";
-    tensor_constructor<X86, X86, AK_FLOAT>();
+    //tensor_constructor<X86, X86, AK_FLOAT>();
     LOG(INFO) << "test X86 INT8 tensor";
-    tensor_constructor<X86, X86, AK_INT8>();
+    //tensor_constructor<X86, X86, AK_INT8>();
 #endif
 
 #ifdef USE_ARM_PLACE
@@ -277,7 +277,7 @@ TEST(TestSaberFunc, test_tensor_constructor) {
 #ifdef USE_BM
     Env<BM>::env_init();
     LOG(INFO) << "test BM FP32 tensor";
-    tensor_constructor<BM, X86, AK_FLOAT>();
+    //tensor_constructor<BM, X86, AK_FLOAT>();
 #endif
 }
 
@@ -496,7 +496,7 @@ TEST(TestSaberFunc, test_tensor_deepcopy) {
     LOG(INFO) << "test X86 FP32 tensor deep copy";
     tensor_deepcopy<X86, X86, AK_FLOAT>();
     LOG(INFO) << "test X86 INT8 tensor deep copy";
-    tensor_deepcopy<X86, X86, AK_INT8>();
+    //tensor_deepcopy<X86, X86, AK_INT8>();
 #endif //USE_X86_PLACE
 
 #ifdef USE_ARM_PLACE
