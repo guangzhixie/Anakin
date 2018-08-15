@@ -105,7 +105,7 @@ void print_tensor<BM>(Tensor<BM>& tensor,  \
             }*/
 
             float *host_mem = new float[tensor.size()];
-            auto* device_data_ptr = const_cast<bm_device_mem_t *>((bm_device_mem_t*) tensor.data());
+            auto* device_data_ptr = const_cast<bm_device_mem_t *>((bm_device_mem_t*) tensor.get_buf()->get_data_mutable());
             bm_memcpy_d2s(API::get_handle(), bm_mem_from_system(host_mem), *device_data_ptr);
 
             for (int i = 0; i < tensor.size(); ++i) {
