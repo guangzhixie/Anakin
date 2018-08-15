@@ -510,7 +510,7 @@ TEST(TestSaberFunc, test_tensor_deepcopy) {
 #ifdef USE_BM
     Env<BM>::env_init();
     LOG(INFO) << "test BM FP32 tensor deep copy";
-    //tensor_deepcopy<BM, X86, AK_FLOAT>();
+    tensor_deepcopy<BM, X86, AK_FLOAT>();
 #endif //USE_BM
 }
 #endif
