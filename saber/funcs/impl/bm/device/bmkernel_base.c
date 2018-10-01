@@ -21,6 +21,10 @@ int bmkernel_func(void *args)
             bm_api_conv_forward* api = (bm_api_conv_forward *)param->opParam;
             return bm_conv_fwd(*api);
         }
+        case POOLING: {
+            bm_api_pooling_forward* api = (bm_api_pooling_forward *)param->opParam;
+            return bm_pooling_fwd(*api);
+        }
         default: {
             printf("op %d is not supported by BM yet.\n", param->op);
             return -1;

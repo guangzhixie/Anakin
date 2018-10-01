@@ -23,7 +23,9 @@
 #include "saber/funcs/impl/cuda/saber_pooling.h"
 #include "saber/funcs/impl/cuda/vender_pooling.h"
 #endif
-
+#ifdef USE_BM_PLACE
+#include "saber/funcs/impl/bm/vender_pooling.h"
+#endif
 #ifdef USE_X86_PLACE
 #include "saber/funcs/impl/x86/saber_pooling.h"
 #endif

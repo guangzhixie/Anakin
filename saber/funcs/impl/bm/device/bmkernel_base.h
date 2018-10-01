@@ -6,35 +6,54 @@ extern "C" {
 
 enum BmOpType {
     ACTIVATION, 
-    CONV
+    CONV,
+    POOLING
 };
 
 typedef struct {
-    unsigned long long             ifmap_offset_global;
-    unsigned long long             ofmap_offset_global;
-    unsigned long long             weight_offset_global;
-    unsigned long long             bias_offset_global;
-    int                            input_n;   // note this is total input_n
-    int                            input_c;
-    int                            input_h;
-    int                            input_w;
-    int                            groups;
-    int                            output_c;
-    int                            kh;
-    int                            kw;
-    int                            dh;
-    int                            dw;
-    int                            pad_h;
-    int                            pad_w;
-    int                            stride_h;
-    int                            stride_w;
-    int                            using_bias;
-    int                            result_add;
-    int                            icsecs;
-    int                            ocsecs;
-    int                            nsecs;
-    int                            hsecs;
+    unsigned long long   ifmap_offset_global;
+    unsigned long long   ofmap_offset_global;
+    unsigned long long   weight_offset_global;
+    unsigned long long   bias_offset_global;
+    int                  input_n;   // note this is total input_n
+    int                  input_c;
+    int                  input_h;
+    int                  input_w;
+    int                  groups;
+    int                  output_c;
+    int                  kh;
+    int                  kw;
+    int                  dh;
+    int                  dw;
+    int                  pad_h;
+    int                  pad_w;
+    int                  stride_h;
+    int                  stride_w;
+    int                  using_bias;
+    int                  result_add;
+    int                  icsecs;
+    int                  ocsecs;
+    int                  nsecs;
+    int                  hsecs;
 } __attribute__((packed)) bm_api_conv_forward;
+
+typedef struct {
+    unsigned long long   ifmap_offset_global;
+    unsigned long long   ofmap_offset_global;
+    int                  input_n;
+    int                  input_c;
+    int                  input_h;
+    int                  input_w;
+    int                  kh;
+    int                  kw;
+    int                  pad_h;
+    int                  pad_w;
+    int                  stride_h;
+    int                  stride_w;
+    int                  is_avg_pooling;
+    int                  n_step;
+    int                  h_step;
+} __attribute__((packed)) bm_api_pooling_forward;
 
 typedef struct {
     enum BmOpType op; // Flag to determine the operation type.
