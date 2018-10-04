@@ -99,6 +99,12 @@ typedef struct conv_secs_info{
     int hsecs;
 } conv_secs_info_t;
 
+typedef struct pooling_secs_info{
+    int nsecs;
+    int hsecs;
+    float Ratio;
+}pooling_secs_info_t;
+
 static INLINE int ceiling_func(int numerator, int denominator)
 {
   return (numerator + denominator - 1) / denominator;

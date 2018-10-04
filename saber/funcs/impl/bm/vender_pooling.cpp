@@ -212,7 +212,7 @@ SaberStatus VenderPooling<BM, AK_FLOAT>::\
             &pooling_secs_info
         );
         if (result == BM_NOT_SUPPORTED) {
-            return result;
+            return SaberInvalidValue;
         }
 
         bm_device_mem_t input_mem, output_mem;
