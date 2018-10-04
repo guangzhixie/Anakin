@@ -1,6 +1,10 @@
 
 #include "saber/funcs/impl/bm/vender_pooling.h"
-#include "saber/funcs/impl/impl_pooling.h"
+#include "bmkernel_base.h"
+#include "bm_common.h"
+#include <string.h>
+#include <stdio.h>
+#include <iostream>
 
 namespace anakin{
 namespace saber {
