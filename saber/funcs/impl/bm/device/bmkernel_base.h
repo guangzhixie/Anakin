@@ -7,6 +7,7 @@ extern "C" {
 enum BmOpType {
     ACTIVATION, 
     CONV,
+    CONV_RELU,
     POOLING
 };
 

@@ -2,6 +2,7 @@
 #include "bm_config.h"
 #include "bmk_conv.c"
 #include "bmk_pooling.c"
+#include "bmk_conv_relu.c"
 #include <stdio.h>
 /**
  * bmkernel_func is the user entry to BMKERNEL just like "main" to some applications.
@@ -21,6 +22,10 @@ int bmkernel_func(void *args)
         case CONV: {
             bm_api_conv_forward* api = (bm_api_conv_forward *)param->opParam;
             return bm_conv_fwd(*api);
+        }
+        case CONV_RELU: {
+            bm_api_conv_forward* api = (bm_api_conv_forward *)param->opParam;
+            return bm_conv_relu_fwd(*api);
         }
         case POOLING: {
             bm_api_pooling_forward* api = (bm_api_pooling_forward *)param->opParam;
