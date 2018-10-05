@@ -32,19 +32,13 @@ int bm_conv_relu_fwd(bm_api_conv_forward conv_param)
     int hsecs = conv_param.hsecs;
 
     P_COMMAND p_command;
+    CMD_ID_NODE id_node;
+    resync_cmd_id( &id_node );
+
     int kh_ext = dh * ( conv_kh - 1) + 1;
     int kw_ext = dw * ( conv_kw - 1) + 1;
     int output_h = (input_h + 2 * conv_pad_h - kh_ext) / conv_stride_h + 1;
-    int conv_output_w = (input_w + 2 * conv_pad_w - kw_ext) / conv_stride_w + 1;
-    int output_w = (conv_output_w + 2 * pool_pad_w - pool_kw) / pool_stride_w + 1;
-    int pool_padw_r = pool_pad_w;
-    int pool_residual_w = (conv_output_w + 2 * pool_pad_w - pool_kw) % pool_stride_w;
-    if((output_w*pool_stride_w < conv_output_w+pool_pad_w) && (pool_residual_w !=0)){
-        output_w++;
-        pool_padw_r += pool_stride_w - pool_residual_w;
-    }
-    CMD_ID_NODE id_node;
-    resync_cmd_id( &id_node );
+    int output_w = (input_w + 2 * conv_pad_w - kw_ext) / conv_stride_w + 1;
 
     int ic = input_c / groups;
     int oc = output_c / groups;
@@ -119,7 +113,7 @@ int bm_conv_relu_fwd(bm_api_conv_forward conv_param)
                 int i_h = i_hb - i_ht;
                 int ifmap_align_size = get_neuron_csize_local(i_h , input_w);
                 int ifmap_tensor_size = sec_len_n * max_ic_per_NPU * ifmap_align_size;
-                int ofmap_align_size = get_neuron_csize_local(o_h, conv_output_w);
+                int ofmap_align_size = get_neuron_csize_local(o_h, output_w);
                 int ofmap_tensor_size = sec_len_n * max_oc_per_NPU * ofmap_align_size;
                 int ifmap_offset_local = ofmap_offset_local + ofmap_tensor_size;
                 int offset_local_end = ifmap_offset_local + ifmap_tensor_size;
@@ -161,7 +155,7 @@ int bm_conv_relu_fwd(bm_api_conv_forward conv_param)
                     ofshape.n = sec_len_n;
                     ofshape.c = cur_ocslice;
                     ofshape.h = o_h;
-                    ofshape.w = conv_output_w;
+                    ofshape.w = output_w;
                     atomic_conv_gen_cmd(
                         p_command,
                         LOCAL_MEM_START_ADDR | ifmap_offset_local,
