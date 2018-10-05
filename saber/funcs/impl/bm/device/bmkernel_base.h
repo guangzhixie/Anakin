@@ -6,7 +6,8 @@ extern "C" {
 
 enum BmOpType {
     ACTIVATION, 
-    CONV
+    CONV,
+    CONV_RELU
 };
 
 typedef struct {
