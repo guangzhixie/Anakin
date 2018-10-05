@@ -270,8 +270,14 @@ SaberStatus VenderConv2D<BM, AK_FLOAT>::\
     bm_status_t bm_stat = bmlib_kernel_launch(_handle, "/usr/local/include/bm/bmkernel_bin.bin");
     CHECK_EQ(BM_SUCCESS, bm_stat) << "bmlib_kernel_launch failed.";
     
+    enum BmOpType op;
+    if (param.activation_param.has_active && param.activation_param.active == Active_relu) {
+      op = CONV_RELU;
+    } else {
+      op = CONV;
+    }
+
     /* Send arguments. */
-    enum BmOpType op = CONV;
     bmkernel_api_base api = { op, reinterpret_cast<void *>(&bm_conv_param) };
     BM_CHECK(bmlib_kernel_send_args(_handle, reinterpret_cast<void *>(&api), sizeof(api)));
 
