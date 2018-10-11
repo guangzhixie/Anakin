@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <iostream>
+#include "tensor_op.h"
 
 namespace anakin
 {
@@ -267,6 +268,8 @@ SaberStatus VenderConv2D<BM, AK_FLOAT>::\
       secs_info.hsecs
     };
 
+    LOG(INFO)<<"BM Conv starts...";
+    
     bm_status_t bm_stat = bmlib_kernel_launch(_handle, "/usr/local/include/bm/bmkernel_bin.bin");
     CHECK_EQ(BM_SUCCESS, bm_stat) << "bmlib_kernel_launch failed.";
     
@@ -274,6 +277,8 @@ SaberStatus VenderConv2D<BM, AK_FLOAT>::\
     enum BmOpType op = CONV;
     bmkernel_api_base api = { op, reinterpret_cast<void *>(&bm_conv_param) };
     BM_CHECK(bmlib_kernel_send_args(_handle, reinterpret_cast<void *>(&api), sizeof(api)));
+
+    LOG(INFO)<<"BM Conv ends...";
 
     return SaberSuccess;
 }
