@@ -9,10 +9,12 @@
 #include <math.h>
 #include <unistd.h>
 #include <time.h>
-#include "bm_config.h"
 #include "op_code.h"
-#include "bm_memmap.h"
 #include "firmware_core_kernel.h"
+#include "bm_config.h"
+#include "bm_memmap.h"
+#include "bmkernel_base.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
