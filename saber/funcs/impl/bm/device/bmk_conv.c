@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "bm_common.h"
+#include "bmkernel_base.h"
 #include "atomic_dma_gen_cmd.h"
 #include "atomic_conv_gen_cmd.h"
 
