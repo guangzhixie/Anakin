@@ -267,7 +267,7 @@ SaberStatus VenderConv2D<BM, AK_FLOAT>::\
       secs_info.hsecs
     };
 
-    bm_status_t bm_stat = bmlib_kernel_launch(_handle, "/usr/local/include/bm/bmkernel_bin.bin");
+    bm_status_t bm_stat = bmlib_kernel_launch(_handle, "/var/tmp/bmkernel_bin.bin");
     CHECK_EQ(BM_SUCCESS, bm_stat) << "bmlib_kernel_launch failed.";
     
     /* Send arguments. */
