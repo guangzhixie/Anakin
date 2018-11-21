@@ -241,7 +241,10 @@ SaberStatus VenderConv2D<BM, AK_FLOAT>::\
           output_shape, with_bias, conv_param, &secs_info);
     CHECK_EQ(BM_SUCCESS, result) << "local memory is not enough in conv.";
 
-    bm_api_conv_forward bm_conv_param = {
+
+    bmkernel_api_base api;
+    api.op = CONV;
+    api.opParam.convParam = {
       bm_mem_get_device_addr(input_buf_mem),
       bm_mem_get_device_addr(out_data),
       bm_mem_get_device_addr(weight),
@@ -271,14 +274,15 @@ SaberStatus VenderConv2D<BM, AK_FLOAT>::\
     LOG(INFO)<<"BM Conv starts...";
     print_tensor(*inputs[0]);
     print_tensor(*(param.mutable_weight()));
+    print_tensor(*outputs[0]);
 
     bm_status_t bm_stat = bmlib_kernel_launch(_handle, "/usr/local/include/bm/bmkernel_bin.bin");
     CHECK_EQ(BM_SUCCESS, bm_stat) << "bmlib_kernel_launch failed.";
     
     /* Send arguments. */
     enum BmOpType op = CONV;
-    bmkernel_api_base api = { op, reinterpret_cast<void *>(&bm_conv_param) };
     BM_CHECK(bmlib_kernel_send_args(_handle, reinterpret_cast<void *>(&api), sizeof(api)));
+
 
     LOG(INFO)<<"BM Conv ends...";
     print_tensor(*outputs[0]);
